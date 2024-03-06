@@ -3,6 +3,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+// Register PersonRep as a singleton service
+builder.Services.AddSingleton<RunningApp.Repo.PersonRep>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -14,6 +17,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

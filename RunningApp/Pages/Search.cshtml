@@ -1,0 +1,68 @@
+@page
+@model RunningApp.Model.Search
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Søg medlemmer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        .search-area {
+            margin-bottom: 20px;
+        }
+        .results-area {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Søg medlemmer</h2>
+
+    <div class="search-area">
+        <form method="get" class="form-inline">
+            <div class="form-group mb-2">
+                <label for="SearchTerm" class="sr-only">Søg :</label>
+                <input type="text" class="form-control" id="SearchTerm" name="SearchTerm" value="@Model.SearchTerm" placeholder="søg her">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="SearchType" id="nameSearch" value="Name" checked>
+                    <label class="form-check-label" for="nameSearch">Navn</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="SearchType" id="teamSearch" value="Team">
+                    <label class="form-check-label" for="teamSearch">Hold</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">SØG</button>
+        </form>
+    </div>
+
+    @if (Model.Results.Any())
+    {
+        <div class="results-area">
+            <h3> Medlemmer</h3>
+            <ul class="list-group">
+                @foreach (var person in Model.Results)
+                {
+                    <li class="list-group-item">@person.Navn - @person.Team</li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <p>Ingen fundet.</p>
+    }
+
+</body>
+</html>
